@@ -113,6 +113,13 @@ describe UsersController do
       response.should have_selector("span.content", :content => mp1.content)
       response.should have_selector("span.content", :content => mp2.content)
     end
+    
+    it "should not show delete links for other users" do
+      other_user = Factory(:user, :email => "test@test.com")
+      test_sign_in(other_user)
+      get :show, :id => @user
+      response.should_not have_selector("a", :content => "delete")
+    end
   end
     
 

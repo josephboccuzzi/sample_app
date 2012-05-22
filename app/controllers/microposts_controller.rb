@@ -18,6 +18,14 @@ class MicropostsController < ApplicationController
     redirect_back_or root_path
   end
   
+  def index
+    redirect_to user_path(find_user)
+  end
+  
+  def find_user
+    @user = User.find(params[:user_id])
+  end
+  
   private
 
     def authorized_user
